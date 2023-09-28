@@ -3,8 +3,12 @@ import React from 'react'
 
 export default function Navbar() {
   return (
-    <nav>
-        <h1>Hakims Livs</h1>
+    <nav style={{
+      border: 'solid 1px red'
+    }}>
+        <h1>Hem</h1> {/* För att veta vart vi befinner oss */}
+        
+        <h2>Hakims Livs</h2>
         <div>
             <Link href="/om-hakim-livs">Om Hakims Livs</Link>
                 <input 
