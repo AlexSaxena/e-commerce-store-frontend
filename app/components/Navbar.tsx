@@ -6,7 +6,7 @@ export default function Navbar() {
     <nav style={{
       border: 'solid 1px red'
     }}>
-        <h1>Hem</h1> {/* För att veta vart vi befinner oss */}
+        <h1>Navbar</h1>
         
         <h2>Hakims Livs</h2>
         <div>
