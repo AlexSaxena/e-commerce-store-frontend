@@ -7,10 +7,10 @@ export default function Sidebar(){
             border: 'solid 1px blue'
           }}>
             <ul>
-                <li><Link href="/">Hem</Link></li>
-                <li> <Link href="/">Mat</Link></li>
-                <li><Link href="/">Kaffe</Link></li>
-                <li> <Link href="/">Om Oss</Link></li>
+                <li><Link href="/" style={{color: "black"}}>Hem</Link></li>
+                <li> <Link href="/" style={{color: "black"}}>Mat</Link></li>
+                <li><Link href="/" style={{color: "black"}}> Erbjudanden</Link></li>
+                <li> <Link href="/" style={{color: "black"}}>Om Oss</Link></li>
             </ul>
         </aside>
     )
