@@ -8,9 +8,11 @@
     "start": "next start",
     "lint": "next lint",
     "format": "npx prettier --write .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "seed": "node ./prisma/seed.js"
   },
   "dependencies": {
+    "@prisma/client": "^5.3.1",
     "@heroicons/react": "^2.0.18",
     "@types/node": "20.6.2",
     "@types/react": "18.2.21",
@@ -35,6 +37,7 @@
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
     "husky": "^8.0.0",
-    "prettier": "^3.0.3"
+    "prettier": "^3.0.3",
+    "prisma": "^5.3.1"
   }
 }
