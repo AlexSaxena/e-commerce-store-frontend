@@ -3,20 +3,15 @@ import React from 'react'
 
 export default function Navbar() {
   return (
-    <nav style={{
-      border: 'solid 1px red'
-    }}>
-        <h1>Navbar</h1>
+    <nav className='bg-black'>
+        <p className='text-xl '>Navbar</p>
         
-        <h2>Hakims Livs</h2>
+        <h1>Hakims Livs</h1>
         <div>
             <Link href="/om-hakim-livs">Om Hakims Livs</Link>
                 <input 
-                className='searchbar'
+                className='searchbar bg-white'
                 type="text" 
-                style={{
-                    border: 'solid 1px red'
-                }}
                 placeholder='search'
                 />
             <Link href="/checkout">Varukorg</Link>
