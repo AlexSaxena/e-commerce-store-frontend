@@ -4,10 +4,7 @@ import React from 'react'
 export default function Footer() {
   return (
     <footer
-    style={{
-        border: 'solid 1px red',
-        marginTop: 1
-    }}>
+    className='bg-black'>
         <h1>Footer</h1>
         <Link href="/kundservice">Kundservice</Link>
     </footer>
