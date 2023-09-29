@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
  
+p, 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+  color: white;
+}
+
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;
