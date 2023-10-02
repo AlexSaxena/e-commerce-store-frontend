@@ -20,7 +20,9 @@ export const RegisterForms = () => {
         <Input id="password" type="password" />
       </div>
       <div className="w-full">
-        <Button className="">Register</Button>
+        <Button className="w-full" size="lg">
+          Register
+        </Button>
       </div>
     </form>
   );
