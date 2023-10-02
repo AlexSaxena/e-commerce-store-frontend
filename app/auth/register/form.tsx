@@ -12,16 +12,16 @@ export const RegisterForms = () => {
   return (
     <form className="space-y-12 w-[400px]">
       <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Label htmlFor="username">Username</Label>
+        <Label htmlFor="username">Användarnamn</Label>
         <Input id="username" type="text" />
       </div>
       <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Label htmlFor="password">Password</Label>
+        <Label htmlFor="password">Lösenord</Label>
         <Input id="password" type="password" />
       </div>
       <div className="w-full">
         <Button className="w-full" size="lg">
-          Register
+          Registrera
         </Button>
       </div>
     </form>
