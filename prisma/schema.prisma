@@ -26,3 +26,12 @@ model Category {
     description String
     products    Product[]
 }
+
+model User {
+    id           Int              @id @default(autoincrement())
+    name         String?
+    email        String           @unique
+    city         String
+    country      String
+    image      String
+}
