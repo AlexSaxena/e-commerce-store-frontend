@@ -10,10 +10,28 @@ export const RegisterForms = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // API REQUEST HERE
+    try {
+      const res = await fetch('hakim/product/db', {
+        method: 'post',
+        body: JSON.stringify({
+          email,
+          username,
+          password,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (res.ok) {
+        // Redirect or something
+      }
+    } catch (error) {
+      console.error(error);
+    }
 
     console.log(
       'Email: ',
