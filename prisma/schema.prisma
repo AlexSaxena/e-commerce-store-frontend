@@ -29,9 +29,7 @@ model Category {
 
 model User {
     id           Int              @id @default(autoincrement())
-    name         String?
+    name         String
     email        String           @unique
-    city         String
-    country      String
-    image      String
+    password     String
 }
