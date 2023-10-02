@@ -1,4 +1,3 @@
-import { FormInput } from 'lucide-react';
 import { RegisterForms } from './form';
 import Link from 'next/link';
 
