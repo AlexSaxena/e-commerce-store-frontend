@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "npx prettier --write .",
-    "prepare": "husky install",
-    "seed": "node ./prisma/seed.js"
+    "prepare": "husky install"
   },
   "dependencies": {
     "@prisma/client": "^5.3.1",
