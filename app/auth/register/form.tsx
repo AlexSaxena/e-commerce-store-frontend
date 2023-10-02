@@ -12,6 +12,10 @@ export const RegisterForms = () => {
   return (
     <form className="space-y-12 w-[400px]">
       <div className="grid w-full max-w-sm items-center gap-1.5">
+        <Label htmlFor="mail">Email</Label>
+        <Input id="mail" type="mail" />
+      </div>
+      <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label htmlFor="username">Användarnamn</Label>
         <Input id="username" type="text" />
       </div>
