@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "npx prettier --write .",
-    "prepare": "husky install",
-    "prisma": "prisma generate"
+    "prepare": "husky install"
   },
   "dependencies": {
     "@prisma/client": "^5.3.1",
