@@ -13,7 +13,7 @@ model Product {
     name        String
     description String    @db.VarChar(999)
     price       Decimal
-    image       String
+    imageUrl    String
     weight      Int
     category    Category? @relation(fields: [category_id], references: [id])
     category_id Int
