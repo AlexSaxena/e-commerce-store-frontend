@@ -10,16 +10,18 @@ export default async function Sidebar() {
       role="Sidebar"
       className="	flex basis-full text-slate-800 text-2xl font-normal "
     >
-      <ul className=" flex flex-col space-y-8 w-full">
+      <ul className=" flex flex-col space-y-8 w-full mt-4">
         <Link href="/#" className="hover:bg-slate-200 w-full">
-          <li className="pl-4 mt-4">Erbjudanden</li>
+          <li className="pl-4">Erbjudanden</li>
         </Link>
 
         {categorys.map((category) => (
-          <Link href="/#" className="hover:bg-slate-200 w-full ">
-            <li key={category.id} className="hover:bg-slate-200 w-full pl-4">
-              {category.name}
-            </li>
+          <Link
+            key={category.id}
+            href="/#"
+            className="hover:bg-slate-200 w-full "
+          >
+            <li className="hover:bg-slate-200 w-full pl-4">{category.name}</li>
           </Link>
         ))}
       </ul>
