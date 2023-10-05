@@ -5,9 +5,18 @@ import logo from '../../public/assets/logos/logo-hakim-01.png';
 
 export default function Footer() {
   return (
-    <footer className="bg-black">
-      <h1>Footer</h1>
-      <Link href="/kundservice">Kundservice</Link>
+    <footer>
+      <div>
+        <div>
+          <img src="" alt="MAYBE Hakim Logo" />
+          <ul>
+            <li>List Here with Links</li>
+            <li>Maybe Home & Contact Us</li>
+          </ul>
+        </div>
+        <hr />
+        <span>© 2023 HakimLivs. All Rights Reserved.</span>
+      </div>
     </footer>
   );
 }
