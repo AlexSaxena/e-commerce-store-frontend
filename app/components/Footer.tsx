@@ -12,6 +12,7 @@ export default function Footer() {
             <Image
               src={logo}
               width={108}
+              height={108}
               alt="Hakims logo"
               className="h-8 mr-3"
             />
