@@ -21,11 +21,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navbar />
-        <div className=" border-blue-200 border-solid border-2 flex gap-1">
+        <div className="pt-2 pb-4 flex gap-1">
           <Sidebar />
           {children}
         </div>
-        <div style={{ border: 'solid orange 5px' }}></div>
+        <div style={{ border: 'solid orange 3px' }}></div>
         <Footer />
       </body>
     </html>
