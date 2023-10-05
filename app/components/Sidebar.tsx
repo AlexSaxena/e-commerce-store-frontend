@@ -1,16 +1,20 @@
 import Link from 'next/link'
 import React from 'react'
+import prisma from "../utils/connectdb";
 
-export default function Sidebar(){
+export default async function Sidebar(){
+
+    const categorys = await prisma.category.findMany();
+
     return(
         <aside role='Sidebar' style={{
             border: 'solid 1px blue'
           }}>
             <ul>
-                <li><Link href="/" style={{color: "black"}}>Hem</Link></li>
-                <li> <Link href="/" style={{color: "black"}}>Mat</Link></li>
-                <li><Link href="/" style={{color: "black"}}> Erbjudanden</Link></li>
-                <li> <Link href="/" style={{color: "black"}}>Om Oss</Link></li>
+                <li><Link href='/#' className=''>Erbjudanden</Link></li>
+                {categorys.map((category) => (
+                    <li key={category.id}><Link href="/#" className=''>{category.name}</Link></li>
+                ))}
             </ul>
         </aside>
     )
