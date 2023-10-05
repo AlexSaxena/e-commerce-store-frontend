@@ -1,20 +1,35 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import logo from '../../public/assets/logos/logo-hakim-01.png'
 
 export default function Navbar() {
   return (
-    <nav className='bg-black'>
-        <p className='text-xl '>Navbar</p>
-        
-        <h1>Hakims Livs</h1>
-        <div>
-            <Link href="/om-hakim-livs">Om Hakims Livs</Link>
-                <input 
-                className='searchbar bg-white'
-                type="text" 
-                placeholder='search'
-                />
+    <nav className='flex flex-row justify-between bg-slate-200'>
+        <div className='flex w-full justify-between items-center'>
+
+          <Link href="/">
+            <Image 
+              src={logo}
+              width={208}
+              height={208}
+              alt="Hakims logo"
+              className='' 
+            />
+          </Link>
+
+          <input 
+            className='flex h-8'
+            type="text" 
+            placeholder='search'
+          />
+          <div className='flex flex-row gap-8 mr-4'>
+            <Link href="/contact">Kontakt</Link>
+
+            <Link href="/om-hakim-livs">Hakims Livs</Link>
+
             <Link href="/checkout">Varukorg</Link>
+          </div>
         </div> 
     </nav>
   )
