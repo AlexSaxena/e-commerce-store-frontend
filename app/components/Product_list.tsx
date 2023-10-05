@@ -22,7 +22,7 @@ export default async function Product_list() {
             />
             <h2 className="text-xl h-16 text-black">{product.name}</h2>
             <p className="text-2xl h-8 text-red-600 font-black">
-              {product.price.toNumber()} kr
+              {product.price?.toNumber()} kr
             </p>
             <small className="text-slate-400">{product.weight}</small>
           </Link>
