@@ -22,12 +22,12 @@ export default function Footer() {
           </Link>
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
             <li>
-              <Link href="#" className="mr-4 hover:underline md:mr-6 ">
+              <Link href="/" className="mr-4 hover:underline md:mr-6 ">
                 Hem
               </Link>
             </li>
             <li>
-              <Link href="#" className="mr-4 hover:underline md:mr-6">
+              <Link href="/om-hakim-livs" className="mr-4 hover:underline md:mr-6">
                 Om Oss
               </Link>
             </li>
@@ -37,7 +37,7 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="#" className="hover:underline">
+              <Link href="/kontakt" className="hover:underline">
                 Kontakta Oss
               </Link>
             </li>

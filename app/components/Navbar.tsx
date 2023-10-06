@@ -39,7 +39,7 @@ export default function Navbar() {
           />
         </div>
         <div className="flex flex-row gap-8 mr-4">
-          <Link href="/contact">Kontakt</Link>
+          <Link href="/kontakt">Kontakt</Link>
 
           <Link href="/om-hakim-livs">Hakims Livs</Link>
 
