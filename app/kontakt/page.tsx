@@ -6,17 +6,17 @@ export default function page() {
       <section>
         <div>
           <div>
-            <h1>Contact Us</h1>
+            <h1>Kontakta Oss!</h1>
             <p>
-              Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
-              gentrify.
+              Något du funderar över eller skulle vilja berätta för oss? Fyll i
+              formuläret så svara vi så fort vi kan!
             </p>
           </div>
           <div>
             <div>
               <div>
                 <div>
-                  <label>Name</label>
+                  <label>Namn</label>
                   <input />
                 </div>
               </div>
@@ -28,12 +28,12 @@ export default function page() {
               </div>
               <div>
                 <div>
-                  <label>Message</label>
+                  <label>Meddelande</label>
                   <textarea></textarea>
                 </div>
               </div>
               <div>
-                <button>Send btn</button>
+                <button>Skicka</button>
               </div>
             </div>
           </div>
