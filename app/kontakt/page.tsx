@@ -10,9 +10,9 @@ export default function page() {
               Kontakta Oss!
             </h1>
             <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-              Något du funderar över eller skulle vilja berätta för oss? Fyll i
-              formuläret så svara vi så fort vi kan!
+              Något du funderar över eller skulle vilja berätta för oss?
             </p>
+            <p> Fyll i formuläret så svara vi så fort vi kan!</p>
           </div>
           <div className="lg:w-1/2 md:w-2/3 mx-auto">
             <div className="flex flex-wrap -m-2">
