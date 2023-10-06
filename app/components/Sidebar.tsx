@@ -8,10 +8,10 @@ export default async function Sidebar() {
   return (
     <aside
       role="Sidebar"
-      className="	flex basis-full text-slate-800 text-2xl font-normal "
+      className="	flex text-slate-800 text-2xl font-normal "
     >
-      <ul className=" flex flex-col space-y-8 w-full mt-4">
-        <Link href="/#" className="hover:bg-slate-200 w-full">
+      <ul className=" flex flex-col space-y-8 mt-4">
+        <Link href="/#" className="hover:bg-slate-200 ">
           <li className="pl-4">Erbjudanden</li>
         </Link>
 
