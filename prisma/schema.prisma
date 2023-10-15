@@ -8,125 +8,101 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Store{
-  id                String     @id @default(uuid())
-  createdAt         DateTime @default(now()) @db.Timestamp(0)
-  updatedAt         DateTime @updatedAt
+model Store {
+  id                String @id @default(uuid())
   name              String
+  userId            String
+  billboards        Billboard[] @relation("StoreToBillboard")
+  categories        Category[] @relation("StoreToCategory")
+  products          Product[] @relation("StoreToProduct")
+  orders            OrderInfo[] @relation("StoreToOrder")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model Billboard {
+  id                String @id @default(uuid())
+  storeId           String
+  store             Store @relation("StoreToBillboard", fields: [storeId], references: [id])
+  label             String
+  imageUrl          String
+  categories        Category[]
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([storeId])
+}
+
+model Category {
+  id                String @id @default(uuid())
+  storeId           String
+  store             Store @relation("StoreToCategory", fields: [storeId], references: [id])
+  billboardId       String?
+  billboard         Billboard? @relation(fields: [billboardId], references: [id])
+  products          Product[] @relation("CategoryToProduct")
+  name              String
+  description       String @db.VarChar(999)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([storeId])
+  @@index([billboardId])
 }
 
 model User {
-  ///////////// juliett /////////////
-  id                String     @id @default(uuid())
+  id                String @id @default(uuid())
   createdAt         DateTime @default(now()) @db.Timestamp(0)
   updatedAt         DateTime @updatedAt
-  email             String  @unique
+  email             String @unique
   username          String
   password          String
   role              String
 
-  ////////////// old /////////////
-  // id           Int              @id @default(autoincrement())
-  // name         String
-  // email        String           @unique
-  // password     String
 }
 
 model Product {
-  ////////// juliett /////////////
   id                String @id @default(uuid())
-  createdAt         DateTime @default(now()) @db.Timestamp(0)
-  updatedAt         DateTime @updatedAt
-  price             Decimal? @db.Decimal(10, 2)
-  name              String
-  description       String @db.VarChar(999)
-  imageUrl          String
-  archived          Boolean @default(false)
-  featured          Boolean @default(false)
-  quantity          Int
-  weight            Int
-
-  // orderId           String
+  storeId           String
+  store             Store @relation("StoreToProduct", fields: [storeId], references: [id])
   categoryId        String
-  // sizeId            String
-  // colorId           String
-
-  // order Order       @relation(fields: [orderId], references: [id])
-  category Category @relation(fields: [categoryId], references: [id])
-  // size Size         @relation(fields: [sizeId], references: [id])
-  // color Color       @relation(fields: [colorId], references: [id])
-
-  // @@index([orderId])
-  @@index([categoryId])
-  // @@index([sizeId])
-  // @@index([colorId])
-
-////////////// old /////////////
-  // id          Int       @id @default(autoincrement())
-  // name        String
-  // description String    @db.VarChar(999)
-  // price       Decimal
-  // imageUrl    String
-  // weight      Int
-  // category    Category? @relation(fields: [category_id], references: [id])
-  // category_id Int
-
-  // @@index([category_id])
-}
-
-model Category{
-  ///////////// juliett /////////////
-  id                String     @id @default(uuid())
-  createdAt         DateTime @default(now()) @db.Timestamp(0)
-  updatedAt         DateTime @updatedAt
+  category          Category @relation("CategoryToProduct", fields: [categoryId], references: [id])
   name              String
-  description       String
-  product           Product[]
-
-  ///////////// old /////////////
-
-  // id          Int       @id @default(autoincrement())
-  // name        String
-  // description String
-  // products    Product[]
-}
-
-model Order{
-  id                String     @id @default(uuid())
-  createdAt         DateTime @default(now()) @db.Timestamp(0)
-  updatedAt         DateTime @updatedAt
-  name              String
-  email             String  @unique
-  phone             String
-  address           String
-  totalPrice        Decimal
-  paid              Boolean @default(false)
-  // product           Product[]
-}
-
-model Billboard {
-  id                String     @id @default(uuid())
-  createdAt         DateTime @default(now()) @db.Timestamp(0)
-  updatedAt         DateTime @updatedAt
-  label             String
-  date              String
+  price             Decimal
+  quantity          Decimal
+  description       String @db.VarChar(999)
+  weight            Decimal
+  isFeatured        Boolean @default(false)
+  isArchived        Boolean @default(false)
   imageUrl          String
+  orderItems        OrderItem[]
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([storeId])
+  @@index([categoryId])
 }
 
-// model Size{
-//   id                String     @id @default(uuid())
-//   createdAt         DateTime @default(now()) @db.Timestamp(0)
-//   updatedAt         DateTime @updatedAt
-//   name              String
-//   value             String
-//   product           Product[]
-//   }
+model OrderInfo {
+  id                String @id @default(uuid())
+  storeId           String
+  store             Store @relation("StoreToOrder",fields: [storeId], references: [id])
+  orderItems        OrderItem[]
+  isPaid            Boolean @default(false)
+  phone             String @default("")
+  address           String @default("")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 
-// model Color{
-//   id                String     @id @default(uuid())
-//   createdAt         DateTime @default(now()) @db.Timestamp(0)
-//   updatedAt         DateTime @updatedAt
-//   name              String
-//   value             String
-//   product           Product[]
-// }
+  @@index([storeId])
+}
+
+model OrderItem {
+  id                String @id @default(uuid())
+  orderId           String
+  OrderInfo         OrderInfo @relation(fields: [orderId], references: [id])
+  productId         String
+  product           Product @relation(fields: [productId], references: [id])
+
+  @@index([orderId])
+  @@index([productId])
+  }

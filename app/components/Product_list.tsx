@@ -29,8 +29,10 @@ export default async function Product_list() {
             <p className="text-2xl h-8 text-red-600 font-black min-w-fit">
               {product.price?.toNumber()} kr
             </p>
-            <small className="text-slate-400">{product.weight.toString()}g</small>
-          </div>
+            <small className="text-slate-400">
+              {product.weight.toString()}g
+            </small>
+          </Link>
           <button className="mt-4 mb-4 align-bottom w-28 bg-transparent hover:bg-purple-800 text-purple-800 font-semibold hover:text-white py-2 px-4 border border-purple-500 hover:border-transparent rounded">
             {/* Pass imageUrl and description as props to Modal */}
             <Modal product={product}/>
