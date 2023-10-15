@@ -44,14 +44,13 @@ export default function Modal({ product }: ModalProps) {
             </button>
             <div className="flex">
               <div className="w-1/2">
-                <img src="https://productimages.motatos.com/7350045591937/7350045591937_1-df0ff51e-5394-4082-89b6-a2fedde3bdcc.jpg?tr=n-product&itok=SPMp__Li" alt="an image" />
+                <img src={product.imageUrl} alt="Image" />
               </div>
               <div className="w-1/2 p-4 flex items-center flex-col">
-                <h3 className="text-xl font-semibold">Name</h3>
-                  <div className='flex'>
-                    <p>Category</p>
-                    |
-                    <p>Weight</p>
+                <h3 className="text-xl font-semibold">{product.name}</h3>
+                  <div className='flex flex-col'>
+                    <p>{product.weight.toString()} ml</p>
+                    <p>{product.price.toString()} kr</p>
                   </div>
                 <button className="bg-purple-500 text-white px-4 py-2 rounded-full mt-32 w-3/4"
                 onClick={onBuy}
