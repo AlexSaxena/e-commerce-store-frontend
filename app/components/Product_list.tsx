@@ -32,14 +32,16 @@ export default async function Product_list() {
             <small className="text-slate-400">
               {product.weight.toString()}g
             </small>
-          </Link>
-          <button className="mt-4 mb-4 align-bottom w-28 bg-transparent hover:bg-purple-800 text-purple-800 font-semibold hover:text-white py-2 px-4 border border-purple-500 hover:border-transparent rounded">
-            {/* Pass imageUrl and description as props to Modal */}
-            <Modal product={product}/>
-          </button>
+          
+            <button className="mt-4 mb-4 align-bottom w-28 bg-transparent hover:bg-purple-800 text-purple-800 font-semibold hover:text-white py-2 px-4 border border-purple-500 hover:border-transparent rounded">
+              {/* Pass imageUrl and description as props to Modal */}
+              <Modal product={product}/>
+            </button>
+          </div>
         </div>
       ))}
     </div>
   );
 }
+
 
