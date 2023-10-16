@@ -1,9 +1,13 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+
+
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Sidebar from './components/Sidebar';
+
+import { CartProvider } from './context/CartContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,16 +22,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Navbar />
-        <div className="pt-2 pb-4 flex gap-1">
-          <Sidebar />
-          {children}
-        </div>
-        <div style={{ border: 'solid orange 3px' }}></div>
-        <Footer />
-      </body>
-    </html>
+    <CartProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <Navbar />
+          <div className="pt-2 pb-4 flex gap-1">
+            <Sidebar />
+            {children}
+          </div>
+          <div style={{ border: 'solid orange 3px' }}></div>
+          <Footer />
+        </body>
+      </html>
+    </CartProvider>
   );
 }
