@@ -2,20 +2,17 @@
 "use client";
 import { useState } from 'react';
 import { Product } from '@prisma/client';
-import { useCart } from '../context/CartContext';
+import { useCartStore } from './store/cartStore';
 
 interface ModalProps {
   product: Product;
 }
 
 export default function Modal({ product }: ModalProps) {
-  const {dispatch} = useCart()
+  const addToCart = useCartStore(state => state.addToCart)
  
-  
   const [isOpen, setIsOpen] = useState(false);
   const [isDescOpen, setIsDescOpen] = useState(false)
-
-
 
   const openModal = () => {
     setIsOpen(true);
@@ -29,15 +26,9 @@ export default function Modal({ product }: ModalProps) {
     document.body.style.overflow = 'auto';
   };
 
-
   const toggleDescription = () => {
     setIsDescOpen(!isDescOpen)
   }
-
-  const handleBuy = () => {
-    dispatch({type: 'ADD_TO_CART', payload: product})
-  }
-
 
   return (
     <>
@@ -60,7 +51,7 @@ export default function Modal({ product }: ModalProps) {
                     <p>{product.price.toString()} kr</p>
                   </div>
                 <button className="bg-purple-500 text-white px-4 py-2 rounded-full mt-32 w-3/4"
-                onClick={handleBuy}
+                onClick={() => addToCart(product)}
                 >
                   Lägg till i varukorg
                 </button>
