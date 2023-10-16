@@ -73,7 +73,9 @@ export const useCartStore = create<State & Actions>((set, get) => {
         totalItems: get().totalItems - 1,
         totalPrice: get().totalPrice - Number(product.price),
       });
-      localStorage.setItem('cart', JSON.stringify(get().cart));
+      if(typeof window !== 'undefined') {
+        localStorage.setItem('cart', JSON.stringify(get().cart));
+      }
     },
   };
 });
