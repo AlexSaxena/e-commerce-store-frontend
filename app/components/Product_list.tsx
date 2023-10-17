@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import Image from 'next/image';
 import prisma from '../utils/connectdb';
 import Modal from './productmodal'; // Make sure to import the correct Modal component
@@ -16,7 +15,7 @@ export default async function Product_list() {
         >
           <div className="flex flex-col items-center w-72">
             <Image
-              src={product.imageUrl}
+              src={`https://productimages.motatos.com/MS207196/7-up-90134d9c-9678-4073-947a-b6d1314c5aba.png?tr=n-product&itok=MW3pOGSO`}
               width={208}
               height={208}
               alt={product.description}

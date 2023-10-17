@@ -18,16 +18,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Navbar />
-        <div className="pt-2 pb-4 flex gap-1">
-          <Sidebar />
-          {children}
-        </div>
-        <div style={{ border: 'solid orange 3px' }}></div>
-        <Footer />
-      </body>
-    </html>
+      <html lang="en">
+        <body className={inter.className}>
+          <Navbar />
+          <div className="pt-2 pb-4 flex gap-1">
+            <Sidebar />
+            {children}
+          </div>
+          <div style={{ border: 'solid orange 3px' }}></div>
+          <Footer />
+        </body>
+      </html>
   );
 }
