@@ -1,14 +1,27 @@
 import Image from 'next/image';
-import prisma from '../utils/connectdb';
-import Modal from './productmodal'; // Make sure to import the correct Modal component
+import prisma from '../../utils/connectdb';
+import Modal from '../../components/productmodal'
 
-export default async function Product_list() {
-  
-  const products = await prisma.product.findMany({
-    where:{
-      storeId: "4d1875a7-1a5a-42d1-a9c1-ffa1b78bba20"
-    }
-  });
+interface param{
+  param: param
+}
+
+
+export default async function Category({params}:{params:{categoryId: string};
+}) {
+
+  const categoryId = params.categoryId;
+
+    const products = await prisma.product.findMany({
+        where:{
+          storeId: "4d1875a7-1a5a-42d1-a9c1-ffa1b78bba20",
+          categoryId: categoryId,
+        },
+        include: {
+          category:true
+        }
+      });
+
 
   return (
     <div className="flex flex-wrap justify-center gap-8 text-center w-5/6">
