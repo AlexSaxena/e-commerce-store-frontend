@@ -8,11 +8,8 @@ import React from 'react';
 let emilstore = '1b9f737b-8ed7-4b20-b3e7-d45dcd91eebe';
 let alexStore = '15fd1e68-0410-41e4-80f9-19c4f1128309';
 
-interface HandleSubmitButtonProps {
-  product: Product;
-}
 
-const HandleSubmitButton: React.FC<HandleSubmitButtonProps> = ({ product }) => {
+const HandleSubmitButton: React.FC = () => {
   const cart = useCartStore((state) => state.cart);
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     console.log('Cart -> ', cart);
