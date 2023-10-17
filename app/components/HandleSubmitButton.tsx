@@ -13,6 +13,18 @@ const HandleSubmitButton: React.FC<HandleSubmitButtonProps> = ({ product }) => {
   const cart = useCartStore((state) => state.cart);
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     console.log('Cart -> ', cart);
+
+    const myOrder: object[] = [];
+
+    cart.forEach((item) => {
+      item.orderItems.forEach((orderItem) => {
+        console.log(orderItem);
+        myOrder.push(orderItem);
+      });
+    });
+
+    console.table(myOrder);
+
     try {
       const response = await fetch(
         `http://localhost:3000/api/${storeId}/orders/addorder`, // CHECK LOCALHOST NR
