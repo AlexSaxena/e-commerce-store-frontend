@@ -10,7 +10,7 @@ interface PageProps {
 
 const Page: React.FC<PageProps> = ({ product }) => {
   return (
-    <div className="flex flex-col relative left-80 text-white">
+    <div className="flex flex-col relative left-80">
       <div>
         <Cart />
         <HandleSubmitButton product={product} />
