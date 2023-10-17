@@ -15,7 +15,7 @@ const HandleSubmitButton: React.FC<HandleSubmitButtonProps> = ({ product }) => {
     console.log('Cart -> ', cart);
     try {
       const response = await fetch(
-        `http://localhost:3001/api/${storeId}/orders/addorder`, // CHECK LOCALHOST NR
+        `http://localhost:3000/api/${storeId}/orders/addorder`, // CHECK LOCALHOST NR
         {
           method: 'POST',
           headers: {
