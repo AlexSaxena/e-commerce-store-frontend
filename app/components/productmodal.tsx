@@ -1,5 +1,6 @@
 // src/Modal.server.js
 'use client';
+import Image from 'next/image';
 import { useState } from 'react';
 import { Product } from '@prisma/client';
 import { useCartStore } from './store/cartStore';
@@ -49,7 +50,13 @@ export default function Modal({ product }: ModalProps) {
             </button>
             <div className="flex">
               <div className="w-1/2">
-                <img src={product.imageUrl} alt="Image" />
+              <Image
+              src={product.imageUrl}
+              width={208}
+              height={208}
+              alt={product.description}
+              className="mt-6 mb-4 hover:scale-110 transition duration-500 cursor-pointer"
+            />
               </div>
               <div className="w-1/2 p-4 flex items-center flex-col">
                 <h3 className="text-xl font-semibold">{product.name}</h3>
