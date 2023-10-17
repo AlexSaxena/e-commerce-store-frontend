@@ -5,6 +5,10 @@ const nextConfig = {}
 
 module.exports = {
     images: {
-      domains: ['picsum.photos', 'productimages.motatos.com']
-    }
-  };
+      remotePatterns: [
+      {
+        hostname: "**",
+      },
+    ],
+  }
+};
