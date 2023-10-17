@@ -8,7 +8,7 @@ interface PageProps {
   product: Product;
 }
 
-export default function page({ product }: PageProps) {
+const Page: React.FC<PageProps> = ({ product }) => {
   return (
     <div className="flex flex-col relative left-80 text-white">
       <div>
@@ -17,4 +17,6 @@ export default function page({ product }: PageProps) {
       </div>
     </div>
   );
-}
+};
+
+export default Page;
