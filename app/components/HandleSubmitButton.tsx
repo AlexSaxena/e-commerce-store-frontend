@@ -44,26 +44,6 @@ const HandleSubmitButton: React.FC<HandleSubmitButtonProps> = ({ product }) => {
 
     console.log('data->', data);
 
-    // console.table(myOrder);
-
-    // const data = {
-    //   storeId: emilstore,
-    //   orderItems: [
-    //     {
-    //       productId: '0223cee8-8884-4c6f-b093-340df860f80a',
-    //       quantity: 2,
-    //     },
-    //     {
-    //       productId: '138f3d69-5194-4846-8976-eb40171a6236',
-    //       quantity: 3,
-    //     },
-    //   ],
-    //   isPaid: true,
-    //   name: 'John Doe',
-    //   phone: '123-456-7890',
-    //   address: '123 Main St',
-    // };
-
     try {
       const response = await fetch(
         `http://localhost:3000/api/${alexStore}/orders/addorder`, // CHECK LOCALHOST NR
@@ -78,11 +58,12 @@ const HandleSubmitButton: React.FC<HandleSubmitButtonProps> = ({ product }) => {
       );
 
       if (response.status === 200) {
-        console.log('Beställning gick ok!');
         const data = await response.json();
-        console.log('data:', data);
+
         return data;
       } else {
+        localStorage.clear();
+
         throw new Error('Something went wrong with data retrieval!');
       }
     } catch (error) {
@@ -91,13 +72,15 @@ const HandleSubmitButton: React.FC<HandleSubmitButtonProps> = ({ product }) => {
   };
 
   return (
-    <button
-      type="submit"
-      className="border border-purple-600"
-      onClick={handleSubmit}
-    >
-      Beställ
-    </button>
+    <form>
+      <button
+        type="submit"
+        className="border border-purple-600"
+        onClick={handleSubmit}
+      >
+        Beställ
+      </button>
+    </form>
   );
 };
 
