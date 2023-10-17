@@ -4,7 +4,11 @@ import Modal from './productmodal'; // Make sure to import the correct Modal com
 
 export default async function Product_list() {
   
-  const products = await prisma.product.findMany();
+  const products = await prisma.product.findMany({
+    where:{
+      storeId: "4d1875a7-1a5a-42d1-a9c1-ffa1b78bba20"
+    }
+  });
 
   return (
     <div className="flex flex-wrap justify-center gap-8 text-center w-5/6">
@@ -15,7 +19,7 @@ export default async function Product_list() {
         >
           <div className="flex flex-col items-center w-72">
             <Image
-              src={`https://productimages.motatos.com/MS207196/7-up-90134d9c-9678-4073-947a-b6d1314c5aba.png?tr=n-product&itok=MW3pOGSO`}
+              src={product.imageUrl}
               width={208}
               height={208}
               alt={product.description}
