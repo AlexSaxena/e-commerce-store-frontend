@@ -12,7 +12,7 @@ export default async function Category({
 
   const products = await prisma.product.findMany({
     where: {
-      storeId: '7ea880c8-fc45-4cb4-b8a2-2e2945e22c01',
+      storeId: '4d1875a7-1a5a-42d1-a9c1-ffa1b78bba20',
       categoryId: categoryId,
     },
     include: {
