@@ -12,7 +12,9 @@ export default function AddToCart({ product }: ModalProps) {
 
   const handleClick = () => {
     addToCart(product);
-    toast.success('Product added to cart');
+    toast.success('Product added to cart', {
+      position: toast.POSITION.TOP_CENTER,
+    });
   };
 
   return (
