@@ -16,9 +16,6 @@ export default function Footer() {
               alt="Hakims logo"
               className="h-8 mr-3"
             />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              Hakim Livs
-            </span>
           </Link>
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
             <li>
@@ -29,11 +26,6 @@ export default function Footer() {
             <li>
               <Link href="/om-hakim-livs" className="mr-4 hover:underline md:mr-6">
                 Om Oss
-              </Link>
-            </li>
-            <li>
-              <Link href="#" className="mr-4 hover:underline md:mr-6 ">
-                Vår Vision
               </Link>
             </li>
             <li>
