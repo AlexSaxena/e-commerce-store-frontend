@@ -6,7 +6,7 @@ import AddToCart from './addToCart';
 export default async function Product_list() {
   const products = await prisma.product.findMany({
     where: {
-      storeId: '7ea880c8-fc45-4cb4-b8a2-2e2945e22c01',
+      storeId: '4d1875a7-1a5a-42d1-a9c1-ffa1b78bba20',
     },
   });
 
@@ -29,7 +29,7 @@ export default async function Product_list() {
             <h2 className="text-xl h-16 text-black mx-4 ">{product.name}</h2>
 
             <p className="text-2xl h-8 text-red-600 font-black min-w-fit">
-              {product.price?.toNumber()} kr
+              {product.price?.toFixed(2)} kr
             </p>
             <small className="text-slate-400">
               {product.weight.toString()}g
