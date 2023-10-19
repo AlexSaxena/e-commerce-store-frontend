@@ -5,8 +5,6 @@ import React, { useState } from 'react';
 
 let storeId = '4d1875a7-1a5a-42d1-a9c1-ffa1b78bba20'; //HAKIMS STOREID
 
-let emilstore = '1b9f737b-8ed7-4b20-b3e7-d45dcd91eebe';
-let alexStore = '1e683312-8daf-4a02-8577-842c545fd49a';
 
 const HandleSubmitButton: React.FC = () => {
   const [name, setName] = useState('');
@@ -48,16 +46,9 @@ const HandleSubmitButton: React.FC = () => {
       address: address,
     };
 
-    // console.log('DATA --->', data);
-
-    // console.log(
-    //   'Data orderItems',
-    //   data.orderItems.map((i) => console.log('i-> ', i)),
-    // );
-
     try {
       const response = await fetch(
-        `https://e-commerce-store-dashboard.vercel.app/${storeId}/orders/addorder`, // CHECK HOST NR
+        `https://e-commerce-store-dashboard.vercel.app/api/${storeId}/orders/addorder`, // CHECK HOST NR
         // `http://localhost:3001/api/${alexStore}/orders/addorder`, // CHECK LOCALHOST NR
         {
           mode: 'no-cors',
