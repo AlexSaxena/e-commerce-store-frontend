@@ -2,7 +2,6 @@ import { create } from 'zustand';
 import { Product, OrderItem } from '@prisma/client';
 import { Decimal } from 'decimal.js';
 
-
 interface CartItem extends Product {
   name: string;
   quantity: Decimal;
@@ -44,16 +43,20 @@ export const useCartStore = create<State & Actions>((set, get) => {
       const cart = get().cart;
       const cartItem = cart.find((item) => item.id === product.id);
 
-     const newOrderItem: OrderItem = {
-      id: product.id,
-      orderId: orderId,
-      productId: product.id
-     }
+      const newOrderItem: OrderItem = {
+        id: product.id,
+        orderId: orderId,
+        productId: product.id,
+      };
 
       if (cartItem) {
         const updatedCart = cart.map((item) =>
           item.id === product.id
-            ? { ...item, quantity: new Decimal(item.quantity).plus(1), orderItems: [...item.orderItems, newOrderItem] }
+            ? {
+                ...item,
+                quantity: new Decimal(item.quantity).plus(1),
+                orderItems: [...item.orderItems, newOrderItem],
+              }
             : item,
         );
         set({
@@ -66,7 +69,10 @@ export const useCartStore = create<State & Actions>((set, get) => {
           localStorage.setItem('cart', JSON.stringify(get().cart));
         }
       } else {
-        const updatedCart = [...cart, { ...product, quantity: new Decimal(1), orderItems: [newOrderItem] }];
+        const updatedCart = [
+          ...cart,
+          { ...product, quantity: new Decimal(1), orderItems: [newOrderItem] },
+        ];
         set({
           ...get(),
           cart: updatedCart,
@@ -83,7 +89,7 @@ export const useCartStore = create<State & Actions>((set, get) => {
         totalItems: get().totalItems - 1,
         totalPrice: get().totalPrice - Number(product.price),
       });
-      if(typeof window !== 'undefined') {
+      if (typeof window !== 'undefined') {
         localStorage.setItem('cart', JSON.stringify(get().cart));
       }
     },

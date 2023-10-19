@@ -14,38 +14,39 @@ export default function Cart() {
   );
 
   return (
-    <>
-      <div>
-        {cart &&
-          cart.map((product) => (
-            <div
-              key={product.id}
-              className="flex justify-between flex-1 border-t border-b"
-            >
-                <div className="mt-2 flex flex-col justify-center">
-                  <Image
-                    src={product.imageUrl}
-                    className="h-16 w-16 "
-                    alt={product.description}
-                    width={200}
-                    height={200}
-                  />
-                  <p className="mt-2">{product.name}</p>
-                </div>
-                <div className="flex flex-col ml-4 mt-4 mb-4">
-                  <button className="border border-slate-400">+</button>
-                  <button className="border border-slate-400">-</button>
-                  <button className="bg-red-600 px-4 rounded-xl border-2 text-m hover:bg-red-800 hover:text-white mt-4" onClick={() => removeFromCart(product)}>
-                    Tabort produkt
-                  </button>
-                </div>
+    <div>
+      {cart &&
+        cart.map((product) => (
+          <div
+            key={product.id}
+            className="flex justify-between flex-1 border-t border-b"
+          >
+            <div className="mt-2 flex flex-col justify-center">
+              <Image
+                src={product.imageUrl}
+                className="h-16 w-16 "
+                alt={product.description}
+                width={200}
+                height={200}
+              />
+              <p className="mt-2">{product.name}</p>
             </div>
-          ))}
-        <div className="flex justify-between items-center mt-4">
-          <span className="text-lg font-bold">Total:</span>
-          <span className="text-xl font-bold">{total.toFixed(2)} kr</span>
-        </div>
+            <div className="flex flex-col ml-4 mt-4 mb-4">
+              <button className="border border-slate-400">+</button>
+              <button className="border border-slate-400">-</button>
+              <button
+                className="bg-red-600 px-4 rounded-xl border-2 text-m hover:bg-red-800 hover:text-white mt-4"
+                onClick={() => removeFromCart(product)}
+              >
+                Tabort produkt
+              </button>
+            </div>
+          </div>
+        ))}
+      <div className="flex justify-between items-center mt-4">
+        <span className="text-lg font-bold">Total:</span>
+        <span className="text-xl font-bold">{total.toFixed(2)} kr</span>
       </div>
-    </>
+    </div>
   );
 }
