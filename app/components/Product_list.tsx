@@ -37,10 +37,7 @@ export default async function Product_list() {
             </small>
 
             <div className="flex justify-between w-52">
-              <button className="mt-4 mb-4 align-bottom w-28 bg-transparent hover:bg-purple-800 text-purple-800 font-semibold hover:text-white py-2 px-4 border border-purple-500 hover:border-transparent rounded">
-                <Modal product={product} />
-              </button>
-
+              <Modal product={product} />
               <AddToCart product={product} />
             </div>
           </div>
