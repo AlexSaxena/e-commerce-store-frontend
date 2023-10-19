@@ -24,7 +24,10 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/om-hakim-livs" className="mr-4 hover:underline md:mr-6">
+              <Link
+                href="/om-hakim-livs"
+                className="mr-4 hover:underline md:mr-6"
+              >
                 Om Oss
               </Link>
             </li>

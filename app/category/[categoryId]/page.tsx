@@ -1,24 +1,24 @@
 import Image from 'next/image';
 import prisma from '../../utils/connectdb';
-import Modal from '../../components/productmodal'
+import Modal from '../../components/productmodal';
 import AddToCart from '../../components/addToCart';
 
-
-export default async function Category({params}:{params:{categoryId: string};
+export default async function Category({
+  params,
+}: {
+  params: { categoryId: string };
 }) {
-
   const categoryId = params.categoryId;
 
-    const products = await prisma.product.findMany({
-        where:{
-          storeId: "7ea880c8-fc45-4cb4-b8a2-2e2945e22c01",
-          categoryId: categoryId,
-        },
-        include: {
-          category:true
-        }
-      });
-
+  const products = await prisma.product.findMany({
+    where: {
+      storeId: '7ea880c8-fc45-4cb4-b8a2-2e2945e22c01',
+      categoryId: categoryId,
+    },
+    include: {
+      category: true,
+    },
+  });
 
   return (
     <div className="flex flex-wrap justify-center gap-8 text-center w-5/6">
@@ -55,5 +55,3 @@ export default async function Category({params}:{params:{categoryId: string};
     </div>
   );
 }
-
-

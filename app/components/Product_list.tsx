@@ -4,11 +4,10 @@ import Modal from './productmodal'; // Make sure to import the correct Modal com
 import AddToCart from './addToCart';
 
 export default async function Product_list() {
-  
   const products = await prisma.product.findMany({
-    where:{
-      storeId: "7ea880c8-fc45-4cb4-b8a2-2e2945e22c01"
-    }
+    where: {
+      storeId: '7ea880c8-fc45-4cb4-b8a2-2e2945e22c01',
+    },
   });
 
   return (
