@@ -3,7 +3,7 @@ import { Product } from '@prisma/client';
 import { useCartStore } from './store/cartStore';
 import React, { useState } from 'react';
 
-let storeId = '4d1875a7-1a5a-42d1-a9c1-ffa1b78bba20'; //Temporary Store ID
+let storeId = '4d1875a7-1a5a-42d1-a9c1-ffa1b78bba20'; //HAKIMS STOREID
 
 let emilstore = '1b9f737b-8ed7-4b20-b3e7-d45dcd91eebe';
 let alexStore = '1e683312-8daf-4a02-8577-842c545fd49a';
