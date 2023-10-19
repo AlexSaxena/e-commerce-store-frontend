@@ -39,10 +39,10 @@ export default function Modal({ product }: ModalProps) {
 
   return (
     <>
-      <button onClick={openModal}>Mer Info</button>
+      <button onClick={openModal} className='mt-4 mb-4 align-bottom w-28 bg-transparent hover:bg-purple-800 text-purple-800 font-semibold hover:text-white py-2 px-4 border border-purple-500 hover:border-transparent rounded'>Mer Info</button>
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="absolute inset-0 bg-black opacity-50"></div>{' '}
+          <div className="absolute inset-0 bg-black opacity-50"></div>
           {/* Backdrop overlay */}
           <div className="bg-white p-6 rounded-lg shadow-lg w-1/3 h-2/4 relative z-10 text-black">
             <button onClick={closeModal} className="absolute top-2 right-2">
@@ -61,7 +61,7 @@ export default function Modal({ product }: ModalProps) {
               <div className="w-1/2 p-4 flex items-center flex-col">
                 <h3 className="text-xl font-semibold">{product.name}</h3>
                 <div className="flex flex-col">
-                  <p>{product.weight.toString()} ml</p>
+                  <small className='text-slate-400'>Vikt: {product.weight.toString()} g</small>
                   <p>{product.price.toString()} kr</p>
                 </div>
                 <button
@@ -73,13 +73,8 @@ export default function Modal({ product }: ModalProps) {
               </div>
             </div>
             <div className="mt-4">
-              <button
-                onClick={toggleDescription}
-                className="text-blue-500 hover:underline"
-              >
-                {isDescOpen ? 'Hide Description' : 'Show Description'}
-              </button>
-              {isDescOpen && <p className="mt-4">Description</p>}
+              <h2 className='font-bold underline'>Beskrivning</h2>
+              <p>{product.description}</p>
             </div>
           </div>
         </div>

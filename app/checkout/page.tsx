@@ -4,12 +4,10 @@ import HandleSubmitButton from '../components/HandleSubmitButton';
 
 const Page: React.FC = () => {
   return (
-    <div className="flex flex-col relative left-80">
-      <div>
+    <section className="flex flex-col relative left-80">
         <Cart />
         <HandleSubmitButton />
-      </div>
-    </div>
+    </section>
   );
 };
 
