@@ -1,37 +1,28 @@
 'use client';
-import { Product } from '@prisma/client';
 import { useCartStore } from './store/cartStore';
 import React, { useState } from 'react';
 
-let storeId = '4d1875a7-1a5a-42d1-a9c1-ffa1b78bba20'; //HAKIMS STOREID
-
-
+const STORE_ID = '4d1875a7-1a5a-42d1-a9c1-ffa1b78bba20'
 const HandleSubmitButton: React.FC = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
 
-  console.log('type of name -> ', typeof name);
-  console.log('type of address -> ', typeof address);
-  console.log('type of phone -> ', typeof phone);
-
   const cart = useCartStore((state) => state.cart);
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    // console.log('Cart -> ', cart);
     e.preventDefault();
 
     const myOrder: object[] = [];
 
     cart.forEach((item) => {
       item.orderItems.forEach((orderItem) => {
-        console.table(item);
-        console.table(orderItem);
         myOrder.push(orderItem);
       });
     });
 
     const data = {
-      storeId: storeId,
+      // storeId: STORE_ID,
+      storeId: STORE_ID,
       orderItems: cart
         .map((item) =>
           item.orderItems.map((orderItem) => ({
@@ -48,8 +39,7 @@ const HandleSubmitButton: React.FC = () => {
 
     try {
       const response = await fetch(
-        `https://e-commerce-store-dashboard.vercel.app/api/${storeId}/orders/addorder`, // CHECK HOST NR
-        // `http://localhost:3001/api/${alexStore}/orders/addorder`, // CHECK LOCALHOST NR
+        `https://e-commerce-store-dashboard.vercel.app/api/${STORE_ID}/orders/addorder`, // CHECK HOST NR
         {
           mode: 'no-cors',
           method: 'POST',
@@ -59,16 +49,16 @@ const HandleSubmitButton: React.FC = () => {
           body: JSON.stringify(data),
         },
       );
-      console.log('response -> ', response);
 
       if (response.status === 200) {
         const data = await response.json();
         console.log('200 Order Skickad');
         console.log('response 200 -> ', response);
+        localStorage.clear();
         return data;
       } else {
-        localStorage.clear();
         console.log('response inte 200-> ', response);
+        localStorage.clear();
         throw new Error('Something went wrong with data retrieval!');
       }
     } catch (error) {

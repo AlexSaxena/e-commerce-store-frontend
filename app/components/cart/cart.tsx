@@ -3,8 +3,6 @@ import Decimal from 'decimal.js';
 import { useCartStore } from '../store/cartStore';
 import Image from 'next/image';
 import { useState } from 'react';
-import Product_list from '../Product_list';
-import { Product } from '@prisma/client';
 
 export default function Cart() {
   const [itemCount, setItemCount] = useState(1);
