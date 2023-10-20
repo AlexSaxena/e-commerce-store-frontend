@@ -75,6 +75,7 @@ export default function Cart() {
                 height={200}
               />
               <p className="mt-2">{product.name}</p>
+              <p className="mt-2">{Number(product.price)} kr/st</p>
             </div>
             <div className="flex flex-col ml-4 mt-4 mb-4">
               <button
