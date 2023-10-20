@@ -5,32 +5,36 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 export default function Cart() {
-  const [itemCount, setItemCount] = useState(1);
   // Get the cart status using the hook useCartStore, which gives us access to the cart status of the store.
   const cart = useCartStore((state) => state.cart);
-
   const removeFromCart = useCartStore((state) => state.removeFromCart);
 
   const handlePlus = (product: any) => {
-    product.quantity = new Decimal(product.quantity).add(1).toNumber();
-    setItemCount(itemCount + 1);
-
-    // Update the totalItems in the store
-    useCartStore.setState({
-      totalItems: useCartStore.getState().totalItems + 1,
+    useCartStore.setState((state) => {
+      const updatedCart = state.cart.map((item) =>
+        item.id === product.id
+          ? {
+              ...item,
+              quantity: new Decimal(item.quantity).add(1),
+            }
+          : item,
+      );
+      return { cart: updatedCart, totalItems: state.totalItems + 1 };
     });
   };
 
   const handleMinus = (product: any) => {
-    if (product.quantity > 0) {
-      product.quantity = new Decimal(product.quantity).minus(1).toNumber();
-      setItemCount(itemCount - 1);
-
-      // Update the totalItems in the store
-      useCartStore.setState({
-        totalItems: useCartStore.getState().totalItems - 1,
-      });
-    }
+    useCartStore.setState((state) => {
+      const updatedCart = state.cart.map((item) =>
+        item.id === product.id
+          ? {
+              ...item,
+              quantity: new Decimal(item.quantity).minus(1),
+            }
+          : item,
+      );
+      return { cart: updatedCart, totalItems: state.totalItems - 1 };
+    });
   };
 
   //Total number of items in the cart
@@ -75,7 +79,8 @@ export default function Cart() {
               >
                 -
               </button>
-              <p>Antal av Vara: {itemCount}</p>
+              <p>Antal av Vara: {Number(product.quantity)}</p>
+              {/* Display the product's quantity */}
               <button
                 className="bg-red-600 px-4 rounded-xl border-2 text-m hover:bg-red-800 hover:text-white mt-4"
                 onClick={() => removeFromCart(product)}
@@ -85,15 +90,13 @@ export default function Cart() {
             </div>
           </div>
         ))}
-      <div className="flex flex-col">
-        <div className="flex justify-between items-center mt-4">
-          <span className="text-lg font-bold">Antal Varor:</span>
-          <span className="text-xl font-bold">{totalItems}</span>
-        </div>
-        <div className="flex justify-between items-center mt-4">
-          <span className="text-lg font-bold">TotalBelopp:</span>
-          <span className="text-xl font-bold">{total.toFixed(2)} kr</span>
-        </div>
+      <div className="flex justify-between items-center mt-4">
+        <span className="text-lg font-bold">Total Items:</span>
+        <span className="text-xl font-bold">{totalItems}</span>
+      </div>
+      <div className="flex justify-between items-center mt-4">
+        <span className="text-lg font-bold">Total:</span>
+        <span className="text-xl font-bold">{total.toFixed(2)} kr</span>
       </div>
     </div>
   );
