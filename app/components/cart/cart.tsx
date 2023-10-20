@@ -2,7 +2,6 @@
 import Decimal from 'decimal.js';
 import { useCartStore } from '../store/cartStore';
 import Image from 'next/image';
-import { useState } from 'react';
 
 export default function Cart() {
   // Get the cart status using the hook useCartStore, which gives us access to the cart status of the store.
@@ -29,11 +28,24 @@ export default function Cart() {
         item.id === product.id
           ? {
               ...item,
-              quantity: new Decimal(item.quantity).minus(1),
+              quantity: new Decimal(item.quantity)
+                .minus(1)
+                .greaterThanOrEqualTo(1)
+                ? new Decimal(item.quantity).minus(1)
+                : new Decimal(1), // Ensure the quantity doesn't go below 1
             }
           : item,
       );
-      return { cart: updatedCart, totalItems: state.totalItems - 1 };
+
+      const newTotalItems = updatedCart.reduce(
+        (acc, product) => acc + Number(product.quantity),
+        0,
+      );
+
+      return {
+        cart: updatedCart,
+        totalItems: newTotalItems >= 0 ? newTotalItems : 0,
+      };
     });
   };
 
@@ -80,7 +92,6 @@ export default function Cart() {
                 -
               </button>
               <p>Antal av Vara: {Number(product.quantity)}</p>
-              {/* Display the product's quantity */}
               <button
                 className="bg-red-600 px-4 rounded-xl border-2 text-m hover:bg-red-800 hover:text-white mt-4"
                 onClick={() => removeFromCart(product)}
@@ -91,11 +102,11 @@ export default function Cart() {
           </div>
         ))}
       <div className="flex justify-between items-center mt-4">
-        <span className="text-lg font-bold">Total Items:</span>
+        <span className="text-lg font-bold">Antal Produkter:</span>
         <span className="text-xl font-bold">{totalItems}</span>
       </div>
       <div className="flex justify-between items-center mt-4">
-        <span className="text-lg font-bold">Total:</span>
+        <span className="text-lg font-bold">Totalbelopp:</span>
         <span className="text-xl font-bold">{total.toFixed(2)} kr</span>
       </div>
     </div>
