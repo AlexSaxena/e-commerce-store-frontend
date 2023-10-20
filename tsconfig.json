@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/utils/connectdb.tsx",
-    "lib/prisma.tsx"
+    "lib/prisma.tsx",
+    "env.d.ts"
   ],
   "exclude": ["node_modules"]
 }
