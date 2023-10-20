@@ -14,14 +14,27 @@ export default function Cart() {
   const handlePlus = (product: any) => {
     product.quantity = new Decimal(product.quantity).add(1).toNumber();
     setItemCount(itemCount + 1);
+
+    // Update the totalItems in the store
+    useCartStore.setState({
+      totalItems: useCartStore.getState().totalItems + 1,
+    });
   };
 
   const handleMinus = (product: any) => {
     if (product.quantity > 0) {
       product.quantity = new Decimal(product.quantity).minus(1).toNumber();
       setItemCount(itemCount - 1);
+
+      // Update the totalItems in the store
+      useCartStore.setState({
+        totalItems: useCartStore.getState().totalItems - 1,
+      });
     }
   };
+
+  //Total number of items in the cart
+  const totalItems = useCartStore((state) => state.totalItems);
 
   // Calculate the total price of the products in the cart by adding the prices of each product multiplied by its quantity.
   const total = cart.reduce(
@@ -72,9 +85,15 @@ export default function Cart() {
             </div>
           </div>
         ))}
-      <div className="flex justify-between items-center mt-4">
-        <span className="text-lg font-bold">Total:</span>
-        <span className="text-xl font-bold">{total.toFixed(2)} kr</span>
+      <div className="flex flex-col">
+        <div className="flex justify-between items-center mt-4">
+          <span className="text-lg font-bold">Antal Varor:</span>
+          <span className="text-xl font-bold">{totalItems}</span>
+        </div>
+        <div className="flex justify-between items-center mt-4">
+          <span className="text-lg font-bold">TotalBelopp:</span>
+          <span className="text-xl font-bold">{total.toFixed(2)} kr</span>
+        </div>
       </div>
     </div>
   );
