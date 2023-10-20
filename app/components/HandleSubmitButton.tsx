@@ -2,7 +2,7 @@
 import { useCartStore } from './store/cartStore';
 import React, { useState } from 'react';
 
-const STORE_ID = process.env.NEXT_PUBLIC_STORE_ID;
+const STORE_ID = '4d1875a7-1a5a-42d1-a9c1-ffa1b78bba20'
 const HandleSubmitButton: React.FC = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
