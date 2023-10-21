@@ -4,7 +4,7 @@ import { Decimal } from 'decimal.js';
 
 interface CartItem extends Product {
   name: string;
-  quantity: Decimal;
+  quantity: number;
   imageUrl: string;
   orderItems: OrderItem[];
 }
@@ -47,6 +47,7 @@ export const useCartStore = create<State & Actions>((set, get) => {
         id: product.id,
         orderId: orderId,
         productId: product.id,
+        quantity: product.quantity,
       };
 
       if (cartItem) {
@@ -54,7 +55,7 @@ export const useCartStore = create<State & Actions>((set, get) => {
           item.id === product.id
             ? {
                 ...item,
-                quantity: new Decimal(item.quantity).plus(1),
+                quantity: item.quantity + 1,
                 orderItems: [...item.orderItems, newOrderItem],
               }
             : item,
@@ -71,7 +72,7 @@ export const useCartStore = create<State & Actions>((set, get) => {
       } else {
         const updatedCart = [
           ...cart,
-          { ...product, quantity: new Decimal(1), orderItems: [newOrderItem] },
+          { ...product, quantity: 1, orderItems: [newOrderItem] },
         ];
         set({
           ...get(),

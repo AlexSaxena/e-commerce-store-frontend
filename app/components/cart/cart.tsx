@@ -14,7 +14,7 @@ export default function Cart() {
         item.id === product.id
           ? {
               ...item,
-              quantity: new Decimal(item.quantity).add(1),
+              quantity: item.quantity + 1,
             }
           : item,
       );
@@ -31,8 +31,8 @@ export default function Cart() {
               quantity: new Decimal(item.quantity)
                 .minus(1)
                 .greaterThanOrEqualTo(1)
-                ? new Decimal(item.quantity).minus(1)
-                : new Decimal(1), // Ensure the quantity doesn't go below 1
+                ? item.quantity - 1
+                : 1, // Ensure the quantity doesn't go below 1
             }
           : item,
       );
