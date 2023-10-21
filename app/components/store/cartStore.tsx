@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import { Product, OrderItem } from '@prisma/client';
-import { Decimal } from 'decimal.js';
 
 interface CartItem extends Product {
   name: string;
@@ -18,6 +17,7 @@ interface State {
 interface Actions {
   addToCart: (Item: Product) => void;
   removeFromCart: (Item: Product) => void;
+  removeOneFromCart: (Item: Product) => void;
 }
 
 const INITIAL_STATE: State = {
@@ -30,9 +30,10 @@ const orderId = Math.random().toString(36).substring(2, 15);
 
 export const useCartStore = create<State & Actions>((set, get) => {
   let initialCart = INITIAL_STATE.cart;
+ 
   if (typeof window !== 'undefined') {
     const savedCart = localStorage.getItem('cart');
-    initialCart = savedCart ? JSON.parse(savedCart) : INITIAL_STATE.cart;
+    initialCart = savedCart ? JSON.parse(savedCart) : INITIAL_STATE.cart;  
   }
 
   return {
@@ -47,7 +48,7 @@ export const useCartStore = create<State & Actions>((set, get) => {
         id: product.id,
         orderId: orderId,
         productId: product.id,
-        quantity: product.quantity,
+        quantity: product.quantity
       };
 
       if (cartItem) {
@@ -58,8 +59,9 @@ export const useCartStore = create<State & Actions>((set, get) => {
                 quantity: item.quantity + 1,
                 orderItems: [...item.orderItems, newOrderItem],
               }
-            : item,
+            : item, 
         );
+
         set({
           ...get(),
           cart: updatedCart,
@@ -67,7 +69,7 @@ export const useCartStore = create<State & Actions>((set, get) => {
           totalPrice: get().totalPrice + Number(product.price),
         });
         if (typeof window !== 'undefined') {
-          localStorage.setItem('cart', JSON.stringify(get().cart));
+          localStorage.setItem('cart', JSON.stringify(updatedCart));
         }
       } else {
         const updatedCart = [
@@ -80,8 +82,8 @@ export const useCartStore = create<State & Actions>((set, get) => {
           totalItems: get().totalItems + 1,
           totalPrice: get().totalPrice + Number(product.price),
         });
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
       }
-      localStorage.setItem('cart', JSON.stringify(get().cart));
     },
     removeFromCart: (product) => {
       set({
@@ -92,6 +94,35 @@ export const useCartStore = create<State & Actions>((set, get) => {
       });
       if (typeof window !== 'undefined') {
         localStorage.setItem('cart', JSON.stringify(get().cart));
+      }
+    },  
+    removeOneFromCart: (product) => {
+      const cart = get().cart;
+      const cartItem = cart.find((item) => item.id === product.id);
+    
+      if (cartItem && cartItem.quantity > 1) {
+        const updatedCart = cart.map((item) =>
+          item.id === product.id
+            ? {
+                ...item,
+                quantity: item.quantity - 1,
+              }
+            : item,
+        );
+    
+        set({
+          ...get(),
+          cart: updatedCart,
+          totalItems: get().totalItems - 1,
+          totalPrice: get().totalPrice - Number(product.price),
+        });
+    
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('cart', JSON.stringify(updatedCart));
+        }
+      } else if (cartItem && cartItem.quantity === 1) {
+        // If the quantity is 1, remove the item from the cart
+        get().removeFromCart(product);
       }
     },
   };
