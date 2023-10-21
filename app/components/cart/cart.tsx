@@ -2,13 +2,22 @@
 import Decimal from 'decimal.js';
 import { useCartStore } from '../store/cartStore';
 import Image from 'next/image';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Cart() {
+  const router = useRouter()
   // Get the cart status using the hook useCartStore, which gives us access to the cart status of the store.
   const cart = useCartStore((state) => state.cart);
   const addToCart = useCartStore((state) => state.addToCart)
   const removeFromCart = useCartStore((state) => state.removeFromCart);
   const removeOneFromCart = useCartStore((state) => state.removeOneFromCart)
+
+  useEffect(() => {
+    if(cart.length === 0) {
+      router.push('/')
+    }
+  }, [cart])
 
   const handlePlus = (product: any) => {
     addToCart(product)
