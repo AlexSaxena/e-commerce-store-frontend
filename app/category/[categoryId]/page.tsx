@@ -1,6 +1,5 @@
 'use client'
 import Image from 'next/image';
-// import prisma from '../../utils/connectdb';
 import { Product } from '@prisma/client';
 import Modal from '../../components/productmodal';
 import AddToCart from '../../components/addToCart';
@@ -20,7 +19,6 @@ export default function Category({
       try {
         const response = await fetch(
           `https://e-commerce-store-dashboard.vercel.app/api/${storeId}/categories/${categoryId}/products`,
-          // `http://localhost:3001/api/${storeId}/categories/${categoryId}/products`, // CHECK HOST NR
           {
             method: 'GET',
           },
