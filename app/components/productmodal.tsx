@@ -35,10 +35,6 @@ export default function Modal({ product }: ModalProps) {
     document.body.style.overflow = 'auto';
   };
 
-  const toggleDescription = () => {
-    setIsDescOpen(!isDescOpen);
-  };
-
   return (
     <>
       <button
@@ -69,9 +65,9 @@ export default function Modal({ product }: ModalProps) {
                 <h3 className="text-xl font-semibold">{product.name}</h3>
                 <div className="flex flex-col">
                   <small className="text-slate-400">
-                    Vikt: {product.weight.toString()} g
+                    Vikt: {product.weight} g
                   </small>
-                  <p>{product.price.toString()} kr</p>
+                  <p>{Number(product.price).toFixed(2)} kr</p>
                 </div>
                 <button
                   className="bg-purple-500 text-white px-4 py-2 rounded-full mt-32 w-3/4"
