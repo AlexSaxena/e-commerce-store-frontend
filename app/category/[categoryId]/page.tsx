@@ -1,24 +1,41 @@
+'use client'
 import Image from 'next/image';
-import prisma from '../../utils/connectdb';
+import { Product } from '@prisma/client';
 import Modal from '../../components/productmodal';
 import AddToCart from '../../components/addToCart';
+import { useEffect, useState } from 'react';
 
-export default async function Category({
+export default function Category({
   params,
 }: {
   params: { categoryId: string };
 }) {
+  const storeId = "4d1875a7-1a5a-42d1-a9c1-ffa1b78bba20"; // storeID from Hakim_livs
+  const [products, setProducts] = useState<Product[]>([]);
   const categoryId = params.categoryId;
 
-  const products = await prisma.product.findMany({
-    where: {
-      storeId: '4d1875a7-1a5a-42d1-a9c1-ffa1b78bba20',
-      categoryId: categoryId,
-    },
-    include: {
-      category: true,
-    },
-  });
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const response = await fetch(
+          `https://e-commerce-store-dashboard.vercel.app/api/${storeId}/categories/${categoryId}/products`,
+          {
+            method: 'GET',
+          },
+        );
+        if (response.ok) {
+          const productsData = await response.json();
+          setProducts(productsData);
+        } else {
+          console.error('Failed to fetch Products.');
+        }
+      } catch (error) {
+        console.error('Error fetching Products:', error);
+      }
+    }
+    fetchProducts();
+  }, [products]);
+
 
   return (
     <div className="flex flex-wrap justify-center gap-8 text-center w-5/6">
@@ -39,10 +56,10 @@ export default async function Category({
             <h2 className="text-xl h-16 text-black mx-4 ">{product.name}</h2>
 
             <p className="text-2xl h-8 text-red-600 font-black min-w-fit">
-              {product.price?.toNumber()} kr
+              {Number(product.price).toFixed(2)} kr
             </p>
             <small className="text-slate-400">
-              {product.weight.toString()}g
+              {product.weight}g
             </small>
 
             <div className="flex justify-between w-52">

@@ -3,6 +3,7 @@ import { useCartStore } from './store/cartStore';
 import React, { useState } from 'react';
 
 const STORE_ID = '4d1875a7-1a5a-42d1-a9c1-ffa1b78bba20'
+
 const HandleSubmitButton: React.FC = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -31,7 +32,6 @@ const HandleSubmitButton: React.FC = () => {
     try {
       const response = await fetch(
         `https://e-commerce-store-dashboard.vercel.app/api/${STORE_ID}/orders`,
-        // `http://localhost:3001/api/${STORE_ID}/orders`,
         {
           method: 'POST',
           mode: 'cors',
@@ -95,7 +95,6 @@ const HandleSubmitButton: React.FC = () => {
 
         <button
           type="submit"
-          // disabled={true}
           className="mt-4 mb-4 align-bottom w-28 bg-transparent hover:bg-purple-800 text-purple-800 font-semibold hover:text-white py-2 px-4 border border-purple-500 hover:border-transparent rounded"
           onClick={handleSubmit}
         >
