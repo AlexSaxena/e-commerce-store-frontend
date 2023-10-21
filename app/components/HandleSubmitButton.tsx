@@ -30,8 +30,8 @@ const HandleSubmitButton: React.FC = () => {
 
     try {
       const response = await fetch(
-        // `https://e-commerce-store-dashboard.vercel.app/api/${STORE_ID}/orders`,
-        `http://localhost:3001/api/${STORE_ID}/orders`,
+        `https://e-commerce-store-dashboard.vercel.app/api/${STORE_ID}/orders`,
+        // `http://localhost:3001/api/${STORE_ID}/orders`,
         {
           method: 'POST',
           mode: 'cors',
