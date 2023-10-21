@@ -65,7 +65,7 @@ export default function Modal({ product }: ModalProps) {
                 <h3 className="text-xl font-semibold">{product.name}</h3>
                 <div className="flex flex-col">
                   <small className="text-slate-400">
-                    Vikt: {product.weight} g
+                    Vikt: {Number(product.weight)} g
                   </small>
                   <p>{Number(product.price).toFixed(2)} kr</p>
                 </div>
