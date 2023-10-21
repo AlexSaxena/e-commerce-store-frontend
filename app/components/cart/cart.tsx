@@ -82,7 +82,7 @@ export default function Cart() {
             </div>
             <div className="flex flex-col ml-4 mt-4 mb-4">
               <button
-                className="border border-slate-400"
+                className="border border-slate-400 bg-blue-500 text-white rounded-lg px-3 py-1 hover:bg-blue-700 transition duration-500 ease-in-out"
                 onClick={() => {
                   handlePlus(product);
                 }}
@@ -90,14 +90,15 @@ export default function Cart() {
                 +
               </button>
               <button
-                className="border border-slate-400"
+                className="border border-slate-400 bg-yellow-500 text-white rounded-lg px-3 py-1 hover:bg-yellow-700 transition duration-500 ease-in-out"
                 onClick={() => handleMinus(product)}
               >
                 -
               </button>
               <p>Antal av Vara: {Number(product.quantity)}</p>
+            
               <button
-                className="bg-red-600 px-4 rounded-xl border-2 text-m hover:bg-red-800 hover:text-white mt-4"
+                className="bg-red-600 px-4 rounded-full border-none text-white mt-4 transition duration-500 ease-in-out shadow-lg hover:bg-red-800 hover:text-white transform "
                 onClick={() => removeFromCart(product)}
               >
                 Tabort produkt
