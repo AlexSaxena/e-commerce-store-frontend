@@ -12,16 +12,7 @@ const HandleSubmitButton: React.FC = () => {
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    const myOrder: object[] = [];
-
-    cart.forEach((item) => {
-      item.orderItems.forEach((orderItem) => {
-        myOrder.push(orderItem);
-      });
-    });
-
     const data = {
-      // storeId: STORE_ID,
       storeId: STORE_ID,
       orderItems: cart
         .map((item) =>
@@ -31,7 +22,7 @@ const HandleSubmitButton: React.FC = () => {
           })),
         )
         .flat(), // This flattens the nested arrays
-      isPaid: true,
+      isPaid: false,
       name: name,
       phone: phone,
       address: address,
@@ -39,10 +30,11 @@ const HandleSubmitButton: React.FC = () => {
 
     try {
       const response = await fetch(
-        `https://e-commerce-store-dashboard.vercel.app/api/${STORE_ID}/orders/addorder`, // CHECK HOST NR
+        // `https://e-commerce-store-dashboard.vercel.app/api/${STORE_ID}/orders`,
+        `http://localhost:3001/api/${STORE_ID}/orders`,
         {
-          mode: 'no-cors',
           method: 'POST',
+          mode: 'cors',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -52,7 +44,6 @@ const HandleSubmitButton: React.FC = () => {
 
       if (response.status === 200) {
         const data = await response.json();
-        console.log('200 Order Skickad');
         console.log('response 200 -> ', response);
         localStorage.clear();
         return data;
