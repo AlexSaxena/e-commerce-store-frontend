@@ -6,15 +6,18 @@ import Image from 'next/image';
 export default function Cart() {
   // Get the cart status using the hook useCartStore, which gives us access to the cart status of the store.
   const cart = useCartStore((state) => state.cart);
+  const addToCart = useCartStore((state) => state.addToCart)
   const removeFromCart = useCartStore((state) => state.removeFromCart);
+  const removeOneFromCart = useCartStore((state) => state.removeOneFromCart)
 
   const handlePlus = (product: any) => {
+    addToCart(product)
     useCartStore.setState((state) => {
       const updatedCart = state.cart.map((item) =>
         item.id === product.id
           ? {
               ...item,
-              quantity: item.quantity + 1,
+              quantity: item.quantity,
             }
           : item,
       );
@@ -23,6 +26,7 @@ export default function Cart() {
   };
 
   const handleMinus = (product: any) => {
+    removeOneFromCart(product)
     useCartStore.setState((state) => {
       const updatedCart = state.cart.map((item) =>
         item.id === product.id
@@ -31,7 +35,7 @@ export default function Cart() {
               quantity: new Decimal(item.quantity)
                 .minus(1)
                 .greaterThanOrEqualTo(1)
-                ? item.quantity - 1
+                ? item.quantity
                 : 1, // Ensure the quantity doesn't go below 1
             }
           : item,
@@ -48,9 +52,8 @@ export default function Cart() {
       };
     });
   };
-
-  //Total number of items in the cart
-  const totalItems = useCartStore((state) => state.totalItems);
+  
+  const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0)
 
   // Calculate the total price of the products in the cart by adding the prices of each product multiplied by its quantity.
   const total = cart.reduce(
@@ -102,9 +105,10 @@ export default function Cart() {
             </div>
           </div>
         ))}
+  
       <div className="flex justify-between items-center mt-4">
-        <span className="text-lg font-bold">Antal Produkter:</span>
-        <span className="text-xl font-bold">{totalItems}</span>
+          <span className="text-lg font-bold">Antal Produkter:</span>
+          <span className="text-xl font-bold">{totalQuantity}</span>
       </div>
       <div className="flex justify-between items-center mt-4">
         <span className="text-lg font-bold">Totalbelopp:</span>
