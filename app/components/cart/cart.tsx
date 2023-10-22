@@ -2,19 +2,31 @@
 import Decimal from 'decimal.js';
 import { useCartStore } from '../store/cartStore';
 import Image from 'next/image';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Cart() {
+  const router = useRouter()
   // Get the cart status using the hook useCartStore, which gives us access to the cart status of the store.
   const cart = useCartStore((state) => state.cart);
+  const addToCart = useCartStore((state) => state.addToCart)
   const removeFromCart = useCartStore((state) => state.removeFromCart);
+  const removeOneFromCart = useCartStore((state) => state.removeOneFromCart)
+
+  useEffect(() => {
+    if(cart.length === 0) {
+      router.push('/')
+    }
+  }, [cart])
 
   const handlePlus = (product: any) => {
+    addToCart(product)
     useCartStore.setState((state) => {
       const updatedCart = state.cart.map((item) =>
         item.id === product.id
           ? {
               ...item,
-              quantity: item.quantity + 1,
+              quantity: item.quantity,
             }
           : item,
       );
@@ -23,6 +35,7 @@ export default function Cart() {
   };
 
   const handleMinus = (product: any) => {
+    removeOneFromCart(product)
     useCartStore.setState((state) => {
       const updatedCart = state.cart.map((item) =>
         item.id === product.id
@@ -31,7 +44,7 @@ export default function Cart() {
               quantity: new Decimal(item.quantity)
                 .minus(1)
                 .greaterThanOrEqualTo(1)
-                ? item.quantity - 1
+                ? item.quantity
                 : 1, // Ensure the quantity doesn't go below 1
             }
           : item,
@@ -48,9 +61,8 @@ export default function Cart() {
       };
     });
   };
-
-  //Total number of items in the cart
-  const totalItems = useCartStore((state) => state.totalItems);
+  
+  const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0)
 
   // Calculate the total price of the products in the cart by adding the prices of each product multiplied by its quantity.
   const total = cart.reduce(
@@ -79,7 +91,7 @@ export default function Cart() {
             </div>
             <div className="flex flex-col ml-4 mt-4 mb-4">
               <button
-                className="border border-slate-400"
+                className="border border-slate-400 bg-blue-500 text-white rounded-lg px-3 py-1 hover:bg-blue-700 transition duration-500 ease-in-out"
                 onClick={() => {
                   handlePlus(product);
                 }}
@@ -87,14 +99,15 @@ export default function Cart() {
                 +
               </button>
               <button
-                className="border border-slate-400"
+                className="border border-slate-400 bg-yellow-500 text-white rounded-lg px-3 py-1 hover:bg-yellow-700 transition duration-500 ease-in-out"
                 onClick={() => handleMinus(product)}
               >
                 -
               </button>
               <p>Antal av Vara: {Number(product.quantity)}</p>
+            
               <button
-                className="bg-red-600 px-4 rounded-xl border-2 text-m hover:bg-red-800 hover:text-white mt-4"
+                className="bg-red-600 px-4 rounded-full border-none text-white mt-4 transition duration-500 ease-in-out shadow-lg hover:bg-red-800 hover:text-white transform "
                 onClick={() => removeFromCart(product)}
               >
                 Tabort produkt
@@ -102,9 +115,10 @@ export default function Cart() {
             </div>
           </div>
         ))}
+  
       <div className="flex justify-between items-center mt-4">
-        <span className="text-lg font-bold">Antal Produkter:</span>
-        <span className="text-xl font-bold">{totalItems}</span>
+          <span className="text-lg font-bold">Antal Produkter:</span>
+          <span className="text-xl font-bold">{totalQuantity}</span>
       </div>
       <div className="flex justify-between items-center mt-4">
         <span className="text-lg font-bold">Totalbelopp:</span>
