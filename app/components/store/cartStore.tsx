@@ -48,19 +48,21 @@ export const useCartStore = create<State & Actions>((set, get) => {
         id: product.id,
         orderId: orderId,
         productId: product.id,
-        quantity: product.quantity
+        quantity: 1
       };
 
       if (cartItem) {
-        const updatedCart = cart.map((item) =>
-          item.id === product.id
-            ? {
-                ...item,
-                quantity: item.quantity + 1,
-                orderItems: [...item.orderItems, newOrderItem],
-              }
-            : item, 
-        );
+        const updatedCart = cart.map((item) =>  
+          item.id === product.id ? {
+            ...item, quantity: item.quantity + 1,
+            orderItems: item.orderItems.map((orderItem) => 
+              orderItem.productId === product.id ? {
+                ...orderItem, quantity: orderItem.quantity + 1
+              } : orderItem
+            )
+          }
+          : item
+        )
 
         set({
           ...get(),
@@ -106,6 +108,11 @@ export const useCartStore = create<State & Actions>((set, get) => {
             ? {
                 ...item,
                 quantity: item.quantity - 1,
+                orderItems: item.orderItems.map((orderItem) => 
+                  orderItem.productId === product.id
+                  ? { ...orderItem, quantity: orderItem.quantity - 1}
+                  : orderItem
+                )
               }
             : item,
         );
