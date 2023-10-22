@@ -7,12 +7,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import Billboard from './components/billboard';
 import getBillboard from './actions/get-billboard';
 
+import Billboardcheck from './components/billboardcheck';
+
 export default async function Home() {
-  const billboard = await getBillboard("e8e3cf67-a3f5-4010-85f8-bad5ab931eb7");
+  
   return (
     <main>
       <div>
-        <Billboard data={billboard}/>
+        <Billboardcheck />
         <Product_list />
       </div>
     </main>
