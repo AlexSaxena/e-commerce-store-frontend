@@ -9,6 +9,8 @@ import { ShoppingCart } from 'lucide-react';
 export default function Navbar() {
   const cart = useCartStore((state) => state.cart);
 
+  const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0)
+
   return (
     <nav className="flex flex-row justify-between bg-slate-200">
   <div className="flex w-full justify-between items-center pl-4 pt-4 pb-4">
@@ -64,7 +66,7 @@ export default function Navbar() {
         </div>
       )}
       <span className={`bg-red-700 text-white text-xs px-1 rounded-full relative bottom-10 left-32 ${cart.length === 0 ? 'hidden' : ''}`}>
-        {cart.length}
+        {totalQuantity}
       </span>
     </div>
   </div>
