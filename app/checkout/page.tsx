@@ -7,9 +7,12 @@ const Cart = dynamic(() => import('../components/cart/cart'), {ssr: false})
 
 const Page: React.FC = () => {
   return (
-    <section className="flex flex-col relative left-80">
+    <section className="flex flex-col relative left-80 w-2/4 ">
       <Cart />  
-      <Modal />
+      <div className='flex w-full justify-center'>
+        <Modal />
+      </div>
+      
     </section>
   );
 };
