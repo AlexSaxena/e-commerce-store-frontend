@@ -4,15 +4,24 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 # E-Commerce Application
 
-### Built With
+## Introduction
 
-- [![vercel]][vercel-url]
-- [![Next][Next.js]][Next-url]
-- [![react]][react-url]
-- [![typescript]][typescript-url]
-- [![tailwind]][tailwind-url]
+Welcome to our E-Commerce Application, a versatile solution designed to empower your online business. This project comprises two crucial components: a feature-rich Frontend Store and a robust API for your Dashboard. Whether you're an entrepreneur looking to launch your own online store or a developer seeking a solid foundation for building an e-commerce platform, this project has got you covered.
 
-<!-- GETTING STARTED -->
+### Key Technologies
+
+- [![Vercel][vercel]][vercel-url]
+- [![Next.js][Next.js]][Next-url]
+- [![React][react]][react-url]
+- [![TypeScript][typescript]][typescript-url]
+- [![Tailwind CSS][tailwind]][tailwind-url]
+
+The Frontend Store and API Backend repositories are hosted on GitHub, enabling seamless collaboration and easy access to the project's source code.
+
+- Frontend Repository: [E-Commerce Store Frontend](https://github.com/AlexSaxena/e-commerce-store-frontend)
+- API Backend Repository: [E-Commerce Store Dashboard](https://github.com/fullstacknator/e-commerce-store-dashboard)
+
+Dive in, explore the codebase, and embark on your journey to create a powerful and dynamic online shopping experience for your customers. Whether you are a developer contributing to this project or a business owner seeking an innovative e-commerce solution, we are excited to have you on board. Let's build the future of online shopping together!
 
 ## Getting Started
 
