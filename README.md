@@ -59,7 +59,7 @@ You can install the latest version using this commmand
 
 4. Start the development server using the command
    ```sh
-   npm run devStart
+   npm run dev
    ```
 5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
